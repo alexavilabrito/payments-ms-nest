@@ -25,7 +25,6 @@ export class PaymentsController {
       ok: true,
       message: 'success'
     };
-    //return this.paymentsService.createPaymentSession();
   }
 
   @Get('cancelled')
@@ -34,7 +33,6 @@ export class PaymentsController {
       ok: true,
       message: 'Payment cancelled'
     };
-    //return this.paymentsService.createPaymentSession();
   }
 
 
