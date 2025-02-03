@@ -12,6 +12,9 @@ interface EnvVars {
     STRIPE_SUCCESS_URL: string;
     STRIPE_CANCEL_URL: string;
     STRIPRE_ENDPOINT_SECRET: string;
+
+
+    NATS_SERVERS: string[];
 }
 
 
@@ -24,7 +27,9 @@ const envsSchema = Joi.object({
     STRIPE_SECRET_KEY: Joi.string().required(),
     STRIPE_SUCCESS_URL: Joi.string().required(),
     STRIPE_CANCEL_URL: Joi.string().required(),
-    STRIPRE_ENDPOINT_SECRET: Joi.string().required()
+    STRIPRE_ENDPOINT_SECRET: Joi.string().required(),
+    NATS_SERVERS: Joi.array().items(Joi.string()).required()
+    
 }).unknown( true );
 
 /*
@@ -32,7 +37,7 @@ const envsSchema = Joi.object({
 */
 const { error, value } = envsSchema.validate({ 
     ... process.env,
-    //NATS_SERVERS: process.env.NATS_SERVERS?.split(',')
+    NATS_SERVERS: process.env.NATS_SERVERS?.split(',')
 });
 
 
@@ -58,5 +63,6 @@ export const envs = {
     stripeSecretKey: envVars.STRIPE_SECRET_KEY,
     stripeSuccessUrl: envVars.STRIPE_SUCCESS_URL,
     stripeCancelUrl: envVars.STRIPE_CANCEL_URL,
-    stripeEndpointSecret: envVars.STRIPRE_ENDPOINT_SECRET
+    stripeEndpointSecret: envVars.STRIPRE_ENDPOINT_SECRET,
+    natServers: envVars.NATS_SERVERS
 }

@@ -1,6 +1,12 @@
 # Payments Services
 
 
+# instalaciones necesarias.
+
+npm i --save @nestjs/microservices
+
+npm i --save nats
+
 
 ## Test
 

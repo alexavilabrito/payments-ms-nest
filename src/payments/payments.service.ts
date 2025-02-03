@@ -17,6 +17,8 @@ export class PaymentsService {
     async createPaymentSession(paymentSessionDto: PaymentSessionDto) {
 
 
+        console.log({ paymentSessionDto });
+
         const { currency, items } = paymentSessionDto;
 
         const line_items = items.map(item => {
@@ -48,7 +50,14 @@ export class PaymentsService {
             cancel_url:  envs.stripeCancelUrl,
         });
 
-        return session;
+        //return session;
+
+        return {
+            id: session.id,
+            url: session.url,
+            cancelUrl: session.cancel_url,
+            successUrl: session.success_url,
+        };
 
     }
 
