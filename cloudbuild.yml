@@ -1,0 +1,28 @@
+steps:
+  - name: "gcr.io/cloud-builders/docker"
+    args:
+      [
+        "build",
+        "-t",
+        "us-east4-docker.pkg.dev/tienda-micro/image-registry/payments-ms",
+        "-f",
+        "dockerfile.prod",
+        "--platform=linux/amd64",
+        ".",
+      ]
+  - name: "gcr.io/cloud-builders/docker"
+    args:
+      [
+        "push",
+        "us-east4-docker.pkg.dev/tienda-micro/image-registry/payments-ms",
+      ]
+
+# Opciones para los registros
+options:
+  # Especifica aquí tu bucket de logs si decides usar un bucket específico
+  # logsBucket: 'gs://[NOMBRE_DEL_BUCKET_DE_LOGS]'
+
+  # O utiliza uno de los siguientes según tu elección de manejo de registros
+  # defaultLogsBucketBehavior: REGIONAL_USER_OWNED_BUCKET
+  logging: CLOUD_LOGGING_ONLY
+  # logging: NONE
